@@ -2,7 +2,7 @@
 #include "Server.h"
 
 
-void TCPserver(server * conquering);
+void TCPserver(server * server, client * client);
 void asioTcpClient(client * conquering, const char* host);
 
 int main(int argc, char* argv[])
@@ -14,7 +14,7 @@ int main(int argc, char* argv[])
 	client1 = client();
 
 
-	TCPserver(&server1);
+	TCPserver(&server1, &client1);
 	asioTcpClient(&client1, SERVER_IP);
 	std::cout << "Press Enter to exit..." << std::endl;
 	getchar();

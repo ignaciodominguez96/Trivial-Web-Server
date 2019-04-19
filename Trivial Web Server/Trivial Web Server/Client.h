@@ -18,7 +18,7 @@ public:
 	client(void);
 	client(const char * ip);
 
-	void set_port(char * port);
+	void set_port(const char * port);
 	char * get_port(void);
 
 	void startConnection(const char* host);
