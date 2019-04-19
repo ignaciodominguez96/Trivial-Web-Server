@@ -1,10 +1,17 @@
 #include <iostream>
 #include "Client.h"
 
-client::client() {
-	IO_handler = new boost::asio::io_service();
-	socket_forClient = new boost::asio::ip::tcp::socket(*IO_handler);
-	client_resolver = new boost::asio::ip::tcp::resolver(*IO_handler);
+client::client(void)
+{
+
+}
+
+
+client::client(const char * ip) {
+	this->IO_handler = new boost::asio::io_service();
+	this->socket_forClient = new boost::asio::ip::tcp::socket(*IO_handler);
+	this->client_resolver = new boost::asio::ip::tcp::resolver(*IO_handler);
+	this->port = 0;
 }
 
 client::~client() {
@@ -14,10 +21,21 @@ client::~client() {
 	delete IO_handler;
 }
 
+
+void client::set_port(const char * port)
+{
+	this->port =(char *) port;
+}
+
+char * client::get_port(void)
+{
+	return this->port;
+}
+
 void client::startConnection(const char* host) {
 	endpoint = client_resolver->resolve(
-		boost::asio::ip::tcp::resolver::query(host, HELLO_PORT_STR));
-	cout << "Trying to connect to " << host << " on port " << HELLO_PORT_STR << std::endl;
+		boost::asio::ip::tcp::resolver::query(host, this->port));
+	cout << "Trying to connect to " << host << " on port " << this->port << std::endl;
 	boost::asio::connect(*socket_forClient, endpoint);
 	socket_forClient->non_blocking(true);
 }

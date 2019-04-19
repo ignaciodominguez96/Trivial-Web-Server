@@ -1,4 +1,3 @@
-#pragma once
 
 #ifndef CLIENT_H
 #define CLIENT_H
@@ -16,7 +15,12 @@ using namespace std;
 
 class client {
 public:
-	client();
+	client(void);
+	client(const char * ip);
+
+	void set_port(char * port);
+	char * get_port(void);
+
 	void startConnection(const char* host);
 	void receiveMessage();
 	~client();
@@ -26,6 +30,7 @@ private:
 	boost::asio::ip::tcp::socket* socket_forClient;
 	boost::asio::ip::tcp::resolver* client_resolver;
 	boost::asio::ip::tcp::resolver::iterator endpoint;
+	char * port;
 };
 
 
