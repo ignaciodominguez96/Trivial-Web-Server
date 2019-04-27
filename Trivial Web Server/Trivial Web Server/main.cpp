@@ -7,17 +7,19 @@ void asioTcpClient(client * conquering, const char* host);
 
 int main(int argc, char* argv[])
 {
-	server server1;
-	server1 = server();
+	server * server1 = new server;
 
-	client client1;
-	client1 = client();
+	client * client1 = new client;
 
 
-	TCPserver(&server1, &client1);
-	asioTcpClient(&client1, SERVER_IP);
+	TCPserver(server1, client1);
+	asioTcpClient(client1, SERVER_IP);
 	std::cout << "Press Enter to exit..." << std::endl;
 	getchar();
+
+
+	delete server1;
+	delete client1;
 }
 
 
